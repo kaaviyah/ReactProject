@@ -4,6 +4,8 @@
 import React, { useState } from "react";
 import {useNavigate}from "react-router-dom";
 import './Login.css';
+import './MainPage';
+
 
 function Login(){
     const navigate=useNavigate();
@@ -13,8 +15,8 @@ function Login(){
         password:""});
         const[error,setError]=useState("");
         const[success,setSuccess]=useState("");
-      
-    
+   
+ 
 const onChange=(event)=>
 {
 
@@ -34,11 +36,7 @@ const emailValidation= (email) =>{
         return passwordRegex.test(password);
     }
     const handleSubmit=(e)=>{
-        // alert("done");
-        //const validate=emailValidation(input.email);
-        // console.log(validate)
-        // const pass=passwordValidation(input.password)
-        // console.log(pass);
+        
         setError('');
         setSuccess('')
         if(!nameValidation(input.name))
@@ -57,7 +55,10 @@ const emailValidation= (email) =>{
         // if(input.email!=='kaaviyah7@gmail.com'||input.name!=='Kaaviyah'||input.password!=="Kaaviyah7$")
         // return setError("Invalid Name or Email or Passowrd")
          setSuccess("Login Successfully");
-        navigate('/Mainpage');
+             
+      const username=input.name;
+      console.log(username);
+        navigate("/Mainpage",{username});
          e.preventDefault();
 
     }
@@ -128,6 +129,7 @@ const emailValidation= (email) =>{
                    <button type="submit" onClick={handleSubmit} >
                     Login
                   </button>
+                 
                   
                   </div>
                   

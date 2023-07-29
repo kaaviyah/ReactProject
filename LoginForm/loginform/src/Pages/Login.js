@@ -6,7 +6,6 @@ import {useNavigate}from "react-router-dom";
 import './Login.css';
 import './MainPage';
 
-
 function Login(){
     const navigate=useNavigate();
     const[input,setInput]=useState({
@@ -15,33 +14,32 @@ function Login(){
         password:""});
         const[error,setError]=useState("");
         const[success,setSuccess]=useState("");
-   
- 
-const onChange=(event)=>
-{
-
-setInput({...input,[event.target.name]:event.target.value})
-
-}
-const nameValidation=(name)=>{
-    const nameRegex=/^[A-Za-z][A-Za-z0-9_]{7,29}$/;
-    return nameRegex.test(name);
-}
-const emailValidation= (email) =>{
-    const emailRegex= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-   return emailRegex.test(email);
-}
- const passwordValidation=(password)=>{
+        const onChange=(event)=>
+        {
+        setInput({...input,[event.target.name]:event.target.value})
+        }
+        const nameValidation=(name)=>
+        {
+        const nameRegex=/^[A-Za-z][A-Za-z0-9_]{7,29}$/;
+        return nameRegex.test(name);
+        }
+        const emailValidation= (email) =>
+        {
+        const emailRegex= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return emailRegex.test(email);
+        }
+        const passwordValidation=(password)=>
+        {
         const passwordRegex=/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
         return passwordRegex.test(password);
-    }
-    const handleSubmit=(e)=>{
-        
+        }
+        const handleSubmit=(e)=>
+        {
         setError('');
         setSuccess('')
         if(!nameValidation(input.name))
         {
-            return setError("Please enter valid Name")
+        return setError("Please enter valid Name")
         }
         if(!emailValidation(input.email))
         {
@@ -51,96 +49,75 @@ const emailValidation= (email) =>{
         {
         return setError("Please enter vaild Password");
         }
-       
-        // if(input.email!=='kaaviyah7@gmail.com'||input.name!=='Kaaviyah'||input.password!=="Kaaviyah7$")
-        // return setError("Invalid Name or Email or Passowrd")
-         setSuccess("Login Successfully");
-             
-      const username=input.name;
-      console.log(username);
-        navigate("/Mainpage",{username});
-         e.preventDefault();
-
-    }
-    return(
-        <div className="register">
-            <div className="row">
-            <div className="col-1-side-image">
-                <p>"We've been using Untitled to
-                    kick start every new project and can't
-                     imagine working without it."
-                </p>
-                </div>
-                </div>
-                <div className="col-right">
-                    <div className="input-box">
-                <h2>Create an account</h2>
-                <span>Let's get started with your 30 
-                    days free trial</span> 
-
-                    {
-                    error.length>0 &&(
-                    <div style={{marginBottom:"10px",marginLeft:"40px",
-                     marginTop:"20px",color:"red"}} >
-                            {error}
-                        </div>
-                      )}
-                      {
-                   success.length>0 &&(
-                    <div style={{marginBottom:"10px", marginLeft:"40px",
-                     marginTop:"20px",color:"green"}} >
-                            {success}
-                        </div>
-                      )}
-                    <div className="form">
-                    <input 
-                    onChange={onChange}
+        setSuccess("Login Successfully");
+        const username=input.name;
+        console.log(username);
+        navigate('/Mainpage',{state:{username:username}});
+        e.preventDefault();
+        }
+        return(
+         <div className="register">
+         <div className="row">
+         <div className="col-1-side-image">
+         <p>"We've been using Untitled to
+           kick start every new project and can't
+           imagine working without it."
+          </p>
+          </div>
+          </div>
+        <div className="col-right">
+        <div className="input-box">
+        <h2>Create an account</h2>
+        <span>Let's get started with your 30 
+           days free trial</span> 
+        {
+            error.length>0 &&(
+        <div style={{marginBottom:"10px",marginLeft:"40px",
+              marginTop:"20px",color:"red"}} >
+               {error}
+         </div> )}
+        {
+             success.length>0 &&(
+               <div style={{marginBottom:"10px", marginLeft:"40px",
+               marginTop:"20px",color:"green"}} >
+                 {success}
+                 </div>
+                  )}
+               <div className="form">
+                  <input 
+                   onChange={onChange}
                     type="text" 
                     name="name" 
                     placeholder="Name" 
                     value={input.name} 
-                     />
-                    </div>
-                   
-                    <div className="form">
-                    
-                    <input
-                    
-                     onChange={onChange}
-                     type="text" 
-                     name="email" 
-                     placeholder="Email"
-                     value={input.email}  
                     />
-                    </div>
-                   
-                    
-                    <div className="form">
-                   
+                 </div>
+                 <div className="form">
+                   <input
+                      onChange={onChange}
+                      type="text" 
+                      name="email" 
+                      placeholder="Email"
+                      value={input.email}  
+                    />
+                 </div>
+                 <div className="form">
                     <input 
-                    onChange={onChange}
-                    type="type" 
-                    value={input.password} 
-                    name="password" 
-                    placeholder="Password"
-                     />
-                    </div>
-                 <div className="btn">
-                   <button type="submit" onClick={handleSubmit} >
-                    Login
-                  </button>
-                 
-                  
+                     onChange={onChange}
+                     type="password" 
+                     value={input.password} 
+                     name="password" 
+                     placeholder="Password"
+                      />
                   </div>
-                  
-
-             
-              
-                </div>
-            </div>
-           </div>
-     
-    );
-
+                  <div className="btn">
+                  <button type="submit" onClick={handleSubmit} >
+                     Login
+                  </button>
+                  </div>
+        </div>
+        </div>
+        </div>
+   );
 }
 export default Login;
